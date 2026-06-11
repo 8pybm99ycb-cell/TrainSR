@@ -1,0 +1,101 @@
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,'Segoe UI',sans-serif;background:#F1F5F9;min-height:100vh;padding:env(safe-area-inset-top,20px) 16px 32px}
+h1{font-size:24px;font-weight:800;color:#0F172A;padding-top:8px}
+.subtitle{font-size:13px;color:#94A3B8;margin-top:4px;margin-bottom:20px}
+.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:20px;-webkit-overflow-scrolling:touch}
+.days::-webkit-scrollbar{display:none}
+.day-btn{flex:0 0 auto;padding:10px 14px;border-radius:12px;border:2px solid transparent;background:#fff;cursor:pointer;text-align:center;transition:all 0.15s;box-shadow:0 1px 3px rgba(0,0,0,0.06);-webkit-tap-highlight-color:transparent}
+.day-btn .icon{font-size:18px}
+.day-btn .dname{font-size:12px;font-weight:700;margin-top:2px}
+.day-btn .dtype{font-size:10px;color:#9CA3AF;margin-top:1px}
+.card{background:#fff;border-radius:20px;box-shadow:0 4px 24px rgba(0,0,0,0.06);overflow:hidden}
+.card-header{padding:20px 24px;display:flex;justify-content:space-between;align-items:center}
+.card-title{font-size:22px;font-weight:800;color:#0F172A}
+.card-type{font-size:14px;font-weight:600;margin-top:2px}
+.card-dur{font-size:12px;color:#64748B;margin-top:4px;text-align:right}
+.card-icon{font-size:30px}
+.card-body{padding:20px 24px}
+.sec{font-size:11px;color:#94A3B8;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;margin-top:18px}
+.sec:first-child{margin-top:0}
+.warmup{background:#F8FAFC;border-radius:10px;padding:10px 14px;font-size:14px;color:#475569;margin-bottom:6px}
+.ex-row{border-radius:10px;background:#FAFAFA;border:1px solid #F1F5F9;margin-bottom:6px;overflow:hidden;transition:border-color 0.15s;-webkit-tap-highlight-color:transparent}
+.ex-row.done{background:#F0FDF4;border-color:#BBF7D0}
+.ex-top{display:flex;align-items:center;gap:10px;padding:10px 14px}
+.chk-box{width:24px;height:24px;border-radius:7px;border:2px solid #CBD5E1;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;color:transparent;cursor:pointer;transition:all 0.15s}
+.ex-row.done .chk-box{background:#16A34A;border-color:#16A34A;color:#fff}
+.ex-info{flex:1;cursor:pointer;min-width:0}
+.ex-name{font-size:14px;font-weight:600;color:#1E293B;transition:color 0.15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ex-row.done .ex-name{color:#4ADE80;text-decoration:line-through}
+.ex-focus{font-size:11px;color:#94A3B8;margin-top:1px}
+.ex-row.done .ex-focus{color:#86EFAC}
+.ex-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px;cursor:pointer;flex-shrink:0}
+.w-badge{font-size:11px;font-weight:700;color:#fff;background:#2563EB;padding:2px 7px;border-radius:10px;white-space:nowrap}
+.ex-row.done .w-badge{background:#16A34A}
+.ex-chev{font-size:11px;color:#CBD5E1;margin-left:4px;transition:transform 0.2s;display:inline-block;cursor:pointer;flex-shrink:0}
+.ex-chev.open{transform:rotate(180deg)}
+.ex-detail{display:none;padding:0 14px 14px}
+.ex-detail.open{display:block}
+.ex-detail img{width:100%;border-radius:10px;margin-bottom:10px;display:block}
+.ex-desc{font-size:13px;color:#475569;line-height:1.5;margin-bottom:8px}
+.ex-tips{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.ex-tip{font-size:12px;color:#64748B}
+.ex-tip::before{content:"-> ";color:#94A3B8}
+.w-row{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#F8FAFC;border-radius:10px;border:1px solid #E2E8F0}
+.w-label{font-size:13px;font-weight:600;color:#374151}
+.w-group{display:flex;align-items:center;gap:6px}
+.w-input{width:72px;padding:6px 10px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:15px;font-weight:700;color:#1E293B;text-align:center;outline:none;-webkit-appearance:none}
+.w-input:focus{border-color:#2563EB}
+.w-unit{font-size:13px;font-weight:600;color:#64748B}
+.chk-row{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;background:#FAFAFA;border:1px solid #F1F5F9;margin-bottom:6px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.chk-row.done{background:#F0FDF4;border-color:#BBF7D0}
+.chk-row .chk-box2{width:22px;height:22px;border-radius:6px;border:2px solid #CBD5E1;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:all 0.15s}
+.chk-row.done .chk-box2{background:#16A34A;border-color:#16A34A;color:#fff}
+.chk-row .chk-text{font-size:14px;color:#1E293B;font-weight:500}
+.chk-row.done .chk-text{color:#4ADE80;text-decoration:line-through}
+.hiit-box{background:#FFF7ED;border:1px solid #FED7AA;border-radius:12px;padding:14px 16px;margin-top:4px}
+.hiit-title{font-size:14px;font-weight:700;color:#EA580C;margin-bottom:4px}
+.hiit-sub{font-size:13px;color:#92400E;margin-bottom:10px}
+.hiit-tags{display:flex;flex-wrap:wrap;gap:6px}
+.hiit-tag{background:#FFEDD5;color:#C2410C;font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px}
+.note{margin-top:16px;padding:10px 14px;background:#F0F9FF;border-radius:10px;font-size:13px;color:#0369A1}
+.run-row{padding:12px 16px;border-radius:12px;margin-bottom:8px}
+.run-hi{background:#FFF7ED;border:1px solid #FED7AA}
+.run-lo{background:#F8FAFC;border:1px solid #F1F5F9}
+.run-phase{font-size:13px;font-weight:700}
+.run-detail{font-size:13px;margin-top:3px}
+.rec-row{padding:12px 16px;border-radius:10px;background:#FAF5FF;border:1px solid #E9D5FF;font-size:14px;color:#6B21A8;margin-bottom:6px}
+.rest-c{text-align:center;padding:32px 0}
+.install-banner{display:none;background:#2563EB;color:#fff;padding:12px 16px;border-radius:12px;margin-bottom:16px;font-size:13px;text-align:center;cursor:pointer}
+
+/* ── Toolbar ── */
+.toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.toolbar-actions{display:flex;gap:8px}
+.btn-icon{background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:8px 12px;font-size:13px;font-weight:600;color:#374151;cursor:pointer;display:flex;align-items:center;gap:5px;-webkit-tap-highlight-color:transparent}
+.btn-icon:active{background:#F1F5F9}
+
+/* ── History overlay ── */
+.hist-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:100;align-items:flex-end;justify-content:center}
+.hist-sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:540px;max-height:80vh;display:flex;flex-direction:column;padding:0 0 env(safe-area-inset-bottom,16px)}
+.hist-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 16px;border-bottom:1px solid #F1F5F9}
+.hist-title{font-size:18px;font-weight:800;color:#0F172A}
+.hist-close{background:none;border:none;font-size:20px;color:#94A3B8;cursor:pointer;padding:4px}
+.hist-list{overflow-y:auto;padding:16px 24px;flex:1}
+.hist-date{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94A3B8;margin-top:16px;margin-bottom:8px}
+.hist-date:first-child{margin-top:0}
+.hist-entry{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#F8FAFC;border-radius:10px;margin-bottom:6px}
+.hist-label{font-size:14px;font-weight:600;color:#1E293B;flex:1}
+.hist-type{font-size:12px;color:#64748B}
+.hist-done{font-size:12px;font-weight:700;color:#16A34A;margin-left:auto}
+
+/* ── Auth gate ── */
+.auth-overlay{display:flex;position:fixed;inset:0;background:#F1F5F9;z-index:200;align-items:center;justify-content:center;flex-direction:column;padding:32px}
+.auth-card{background:#fff;border-radius:20px;box-shadow:0 4px 24px rgba(0,0,0,0.08);padding:32px 28px;width:100%;max-width:340px;text-align:center}
+.auth-icon{font-size:40px;margin-bottom:16px}
+.auth-title{font-size:20px;font-weight:800;color:#0F172A;margin-bottom:6px}
+.auth-sub{font-size:13px;color:#64748B;margin-bottom:24px}
+.auth-input{width:100%;border:2px solid #E2E8F0;border-radius:12px;padding:12px 16px;font-size:16px;outline:none;text-align:center;letter-spacing:4px;transition:border-color 0.15s}
+.auth-input:focus{border-color:#2563EB}
+.auth-input.error{border-color:#EF4444;animation:shake 0.3s}
+.auth-btn{margin-top:16px;width:100%;background:#2563EB;color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:700;cursor:pointer}
+.auth-btn:active{background:#1D4ED8}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
