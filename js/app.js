@@ -22,7 +22,7 @@ var DAYS = [
   {day:"So", label:"Sonntag",    type:"Ruhetag",    color:"#F8FAFC", accent:"#94A3B8", icon:"😴", dur:"--",        kind:"rest",    note:"Komplett frei. Kein Training."}
 ];
 
-var sel = 0;
+var sel = (new Date().getDay() + 6) % 7; // 0=Mo … 6=So
 var openEx = null;
 var deferredPrompt = null;
 
@@ -250,14 +250,17 @@ function togEx(i) { openEx = (openEx === i) ? null : i; renderCard(); }
 function selDay(i) { sel = i; openEx = null; renderTabs(); renderCard(); }
 
 function renderTabs() {
+  var today = (new Date().getDay() + 6) % 7;
   var h = "";
   for (var i = 0; i < DAYS.length; i++) {
     var d = DAYS[i];
     var active = (i === sel);
+    var isToday = (i === today);
     h += '<button class="day-btn" onclick="selDay(' + i + ')" style="border-color:' + (active ? d.accent : 'transparent') + ';background:' + (active ? d.color : '#fff') + ';">';
     h += '<div class="icon">' + d.icon + '</div>';
     h += '<div class="dname" style="color:' + (active ? d.accent : '#374151') + '">' + d.day + '</div>';
     h += '<div class="dtype">' + d.type + '</div>';
+    if (isToday) { h += '<div class="today-dot" style="background:' + d.accent + '"></div>'; }
     h += '</button>';
   }
   document.getElementById("tabs").innerHTML = h;
