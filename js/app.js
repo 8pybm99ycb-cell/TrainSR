@@ -1,12 +1,12 @@
 var EX = [
-  {name:"Goblet Squat",               focus:"Unterkörper Push", bg:"#DBEAFE", img:"goblet",   desc:"Hantel vor der Brust halten, Füße schulterbreit, tief in die Knie gehen.",                                     tips:["Knie über Zehen drücken","Rücken gerade, Brust hoch","Fersen bleiben am Boden"]},
-  {name:"Kurzhantel Bankdrücken",      focus:"Oberkörper Push",  bg:"#FCE7F3", img:"bench",    desc:"Auf Bank liegen, Kurzhanteln auf Brusthöhe, kontrolliert drücken und absenken.",                                tips:["Schulterblätter zusammenziehen","Ellbogen ca. 45° zum Körper","Langsam absenken (3 Sek)"]},
-  {name:"Romanian Deadlift",           focus:"Hinge",            bg:"#D1FAE5", img:"rdl",      desc:"Hanteln vor den Oberschenkeln, Hüfte nach hinten schieben, Rücken gerade halten.",                              tips:["Knie leicht gebeugt","Hüfte ist der Motor, nicht der Rücken","Dehnung in der Hamstring spüren"]},
-  {name:"Einarmiges Rudern",           focus:"Oberkörper Pull",  bg:"#FEF3C7", img:"row",      desc:"Knie und Hand auf Bank abstützen, Hantel zur Hüfte ziehen.",                                                    tips:["Ellbogen nah am Körper","Schulterblatt am Ende einziehen","Rumpf stabil halten"]},
-  {name:"Schulterdrücken",             focus:"Oberkörper Push",  bg:"#FCE7F3", img:"shoulder", desc:"Stehend, Kurzhanteln auf Schulterhöhe, senkrecht nach oben drücken.",                                          tips:["Core anspannen, kein Hohlkreuz","Nicht ganz durchstrecken","Kontrolliert absenken"]},
-  {name:"Lat Pulldown / Kabelzug",     focus:"Oberkörper Pull",  bg:"#FEF3C7", img:"lat",      desc:"Breiter Griff, Stange zur Brust ziehen, Ellbogen nach unten-hinten führen.",                                    tips:["Nicht nach hinten lehnen","Latissimus bewusst anspannen","Langsam zurück"]},
-  {name:"Farmers Carry",               focus:"Core / HYROX",     bg:"#F3E8FF", img:"farmers",  desc:"Schwere Kurzhanteln in beiden Händen halten und 30m zügig gehen.",                                              tips:["Schultern zurück und unten","Blick geradeaus","Gewicht progressiv steigern"]},
-  {name:"Plank / Dead Bug",            focus:"Core",             bg:"#F3E8FF", img:"plank",    desc:"Plank: Unterarme auf dem Boden, Körper gerade. Dead Bug: Rücken flach, Arme und Beine kontrolliert absenken.", tips:["Keine Hüfte hängen lassen","Bauch aktiv anspannen","Gleichmäßig atmen"], unit:"s", label:"Meine Zeit"}
+  {name:"Ausfallschritte",         focus:"Unterkörper Push",   bg:"#FFF7ED", img:"lunge",       desc:"Aufrecht stehen, großen Schritt nach vorne, hinteres Knie Richtung Boden absenken. Abwechselnd links/rechts.",        tips:["Vorderes Knie über dem Fußgelenk","Oberkörper aufrecht, kein Vorbeugen","Ferse des vorderen Fußes fest am Boden"]},
+  {name:"Romanian Deadlift",       focus:"Hinge / Posterior",  bg:"#D1FAE5", img:"rdl",         desc:"Hanteln vor den Oberschenkeln, Hüfte nach hinten schieben, Rücken gerade halten.",                                    tips:["Knie leicht gebeugt","Hüfte ist der Motor, nicht der Rücken","Dehnung in der Hamstring spüren"]},
+  {name:"Kurzhantel Bankdrücken",  focus:"Oberkörper Push",    bg:"#FCE7F3", img:"bench",       desc:"Auf Bank liegen, Kurzhanteln auf Brusthöhe, kontrolliert drücken und absenken.",                                      tips:["Schulterblätter zusammenziehen","Ellbogen ca. 45° zum Körper","Langsam absenken (3 Sek)"]},
+  {name:"Schulterdrücken",         focus:"Oberkörper Push",    bg:"#FCE7F3", img:"shoulder",    desc:"Stehend, Kurzhanteln auf Schulterhöhe, senkrecht nach oben drücken.",                                                tips:["Core anspannen, kein Hohlkreuz","Nicht ganz durchstrecken","Kontrolliert absenken"]},
+  {name:"Einarmiges Rudern",       focus:"Oberkörper Pull",    bg:"#FEF3C7", img:"row",         desc:"Knie und Hand auf Bank abstützen, Hantel zur Hüfte ziehen.",                                                          tips:["Ellbogen nah am Körper","Schulterblatt am Ende einziehen","Rumpf stabil halten"]},
+  {name:"Lat Pulldown / Kabelzug", focus:"Oberkörper Pull",    bg:"#FEF3C7", img:"lat",         desc:"Breiter Griff, Stange zur Brust ziehen, Ellbogen nach unten-hinten führen.",                                          tips:["Nicht nach hinten lehnen","Latissimus bewusst anspannen","Langsam zurück"]},
+  {name:"Reverse Fly",             focus:"Posteriore Schulter",bg:"#EFF6FF", img:"reverse_fly", desc:"Vorgebeugt stehen (45°), Kurzhanteln hängen vor dem Körper, Arme seitlich bis Schulterhöhe anheben.",                  tips:["Arme leicht gebeugt, keine Rotation","Schulterblätter am höchsten Punkt zusammendrücken","Kontrolliert absenken, kein Schwung"]},
+  {name:"Plank / Dead Bug",        focus:"Core",               bg:"#F3E8FF", img:"plank",       desc:"Plank: Unterarme auf dem Boden, Körper gerade. Dead Bug: Rücken flach, Arme und Beine kontrolliert absenken.",        tips:["Keine Hüfte hängen lassen","Bauch aktiv anspannen","Gleichmäßig atmen"], unit:"s", label:"Meine Zeit"}
 ];
 
 var HIIT_EX = [
@@ -17,16 +17,15 @@ var HIIT_EX = [
 ];
 
 var DAYS = [
-  {day:"Mo", label:"Montag",     type:"Kraft",      color:"#E8F4FD", accent:"#2563EB", icon:"💪", dur:"60-75 Min", kind:"workout", note:"Ins Versagen trainieren. Gewicht so wählen, dass nach 8-12 Wdh Schluss ist."},
-  {day:"Di", label:"Dienstag",   type:"Lauf",       color:"#FFF7ED", accent:"#EA580C", icon:"🏃", dur:"40-50 Min", kind:"run",     note:"Kerneinheit für Tempoverbesserung. Nicht schneller als angegeben.",
-    runs:[{p:"Einlaufen",d:"10 Min bei 6:30-7:00 /km",h:0},{p:"Intervalle",d:"6 x 400m bei ~5:00 /km mit 90 Sek. Trabpause",h:1},{p:"Auslaufen",d:"10 Min locker",h:0}]},
-  {day:"Mi", label:"Mittwoch",   type:"Kraft+HIIT", color:"#F0FDF4", accent:"#16A34A", icon:"🔥", dur:"75-90 Min", kind:"hiit",    note:"Gleiche Übungen wie Mo/Fr, plus HIIT-Finish am Ende."},
-  {day:"Do", label:"Donnerstag", type:"Erholung",   color:"#FDF4FF", accent:"#9333EA", icon:"🧘", dur:"30-45 Min", kind:"recovery",note:"Kein intensives Training. Recovery ist Teil des Plans.",
-    opts:["Lockeres Gehen","Mobility und Stretching","Schwimmen","Bei Zeitmangel: komplett frei"]},
-  {day:"Fr", label:"Freitag",    type:"Kraft",      color:"#E8F4FD", accent:"#2563EB", icon:"💪", dur:"60-75 Min", kind:"workout", note:"Ins Versagen trainieren. Gewicht so wählen, dass nach 8-12 Wdh Schluss ist."},
-  {day:"Sa", label:"Samstag",    type:"Lauf",       color:"#FFF7ED", accent:"#EA580C", icon:"🏃", dur:"50-60 Min", kind:"run",     note:"Alle 2 Wochen zwischen Option A und B wechseln.",
-    runs:[{p:"Option A: Tempolauf",d:"10 Min einlaufen, 25-30 Min bei 5:20-5:30 /km, 10 Min auslaufen",h:1},{p:"Option B: Langer Lauf",d:"8-10 km bei 6:00-6:30 /km, ruhig",h:0}]},
-  {day:"So", label:"Sonntag",    type:"Ruhetag",    color:"#F8FAFC", accent:"#94A3B8", icon:"😴", dur:"--",        kind:"rest",    note:"Komplett frei. Kein Training."}
+  {day:"Mo", label:"Montag",     type:"Kraft",     color:"#E8F4FD", accent:"#2563EB", icon:"💪", dur:"60-75 Min", kind:"workout",   note:"8-12 Wiederholungen pro Satz bis nah ans Versagen. Gewicht progressiv steigern."},
+  {day:"Di", label:"Dienstag",   type:"Intervalle",color:"#FFF7ED", accent:"#EA580C", icon:"🏃", dur:"40-50 Min", kind:"run",       note:"Kerneinheit für Tempoverbesserung. Nicht schneller als angegeben – Qualität vor Quantität.",
+    runs:[{p:"Einlaufen",d:"10 Min bei 6:30-7:00 /km",h:0},{p:"Intervalle",d:"6 × 400m bei ~5:00 /km mit 90 Sek. Trabpause",h:1},{p:"Auslaufen",d:"10 Min locker",h:0}]},
+  {day:"Mi", label:"Mittwoch",   type:"Kraft",     color:"#E8F4FD", accent:"#2563EB", icon:"💪", dur:"60-75 Min", kind:"workout",   note:"Gleiche Übungen wie Mo und Fr. Gewichte aus der letzten Einheit als Ausgangspunkt nehmen."},
+  {day:"Do", label:"Donnerstag", type:"HIIT",      color:"#F0FDF4", accent:"#16A34A", icon:"🔥", dur:"25-30 Min", kind:"hiit_only", note:"Eigenständige HIIT-Einheit – volle Energie, kein Kraftteil davor. 4 Runden durch alle Übungen."},
+  {day:"Fr", label:"Freitag",    type:"Kraft",     color:"#E8F4FD", accent:"#2563EB", icon:"💪", dur:"60-75 Min", kind:"workout",   note:"Letzte Krafteinheit der Woche. Alle 2 Wochen Gewichte erhöhen wenn 12 Wdh sauber möglich."},
+  {day:"Sa", label:"Samstag",    type:"Langer Lauf",color:"#FFF7ED", accent:"#EA580C", icon:"🏃", dur:"50-65 Min", kind:"run",      note:"Ruhiges Tempo, du solltest dich noch unterhalten können. Ausdauerbasis aufbauen.",
+    runs:[{p:"Einlaufen",d:"5-10 Min sehr locker",h:0},{p:"Hauptteil",d:"35-45 Min bei 6:00-6:30 /km – gleichmäßiges Tempo",h:1},{p:"Auslaufen",d:"5 Min gehen + dehnen",h:0}]},
+  {day:"So", label:"Sonntag",    type:"Ruhetag",   color:"#F8FAFC", accent:"#94A3B8", icon:"😴", dur:"--",        kind:"rest",      note:"Komplett frei. Erholung ist Bestandteil des Trainings – nicht überspringen."}
 ];
 
 var sel = (new Date().getDay() + 6) % 7; // 0=Mo … 6=So
@@ -275,17 +274,18 @@ function renderCard() {
   header += '<div><div class="card-icon">' + d.icon + '</div><div class="card-dur">' + d.dur + '</div></div>';
   header += '</div>';
   var h = "";
-  if (d.kind === "workout" || d.kind === "hiit") {
+  if (d.kind === "workout") {
     h += '<div class="sec">Aufwärmen</div>';
     h += '<div class="warmup">5-10 Min lockeres Einlaufen oder Bike</div>';
     h += '<div class="sec">Übungen — Abhaken wenn erledigt · Antippen für Details</div>';
     h += renderExRows(d.accent);
-    if (d.kind === "hiit") {
-      h += '<div class="sec">HIIT-Finish</div>';
-      h += '<div class="hiit-box"><div class="hiit-title">4 Runden · Arbeitszeit pro Übung / 20 Sek Pause · ~15 Min</div>';
-      h += '<div class="hiit-sub">Direkt nach dem Kraftteil · Antippen für Details & Arbeitszeit</div></div>';
-      h += renderHiitRows();
-    }
+  } else if (d.kind === "hiit_only") {
+    h += '<div class="sec">Aufwärmen</div>';
+    h += '<div class="warmup">5 Min lockeres Einlaufen oder Jumping Jacks</div>';
+    h += '<div class="sec">HIIT · 4 Runden · 20 Sek Pause zwischen Übungen</div>';
+    h += '<div class="hiit-box"><div class="hiit-title">Alle 4 Übungen = 1 Runde · 60 Sek Pause nach jeder Runde</div>';
+    h += '<div class="hiit-sub">Antippen für Details & eigene Arbeitszeit einstellen</div></div>';
+    h += renderHiitRows();
   } else if (d.kind === "run") {
     h += '<div class="sec">Abhaken wenn erledigt</div>';
     h += simpleChk(sel, "warmup", "Einlaufen");

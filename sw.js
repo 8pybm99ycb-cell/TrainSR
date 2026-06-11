@@ -1,4 +1,4 @@
-var CACHE_VERSION = 'trainsr-v4';
+var CACHE_VERSION = 'trainsr-v5';
 var FILES = [
   './',
   './index.html',
@@ -11,7 +11,8 @@ var FILES = [
   './assets/row.jpg',
   './assets/shoulder.jpg',
   './assets/lat.jpg',
-  './assets/farmers.jpg',
+  './assets/lunge.jpg',
+  './assets/reverse_fly.jpg',
   './assets/plank.jpg',
   './icon-192.png',
   './icon-512.png'
