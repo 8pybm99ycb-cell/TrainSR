@@ -1,4 +1,4 @@
-var CACHE_VERSION = 'trainsr-v3';
+var CACHE_VERSION = 'trainsr-v4';
 var FILES = [
   './',
   './index.html',

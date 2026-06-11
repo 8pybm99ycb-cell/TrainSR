@@ -6,7 +6,14 @@ var EX = [
   {name:"Schulterdrücken",             focus:"Oberkörper Push",  bg:"#FCE7F3", img:"shoulder", desc:"Stehend, Kurzhanteln auf Schulterhöhe, senkrecht nach oben drücken.",                                          tips:["Core anspannen, kein Hohlkreuz","Nicht ganz durchstrecken","Kontrolliert absenken"]},
   {name:"Lat Pulldown / Kabelzug",     focus:"Oberkörper Pull",  bg:"#FEF3C7", img:"lat",      desc:"Breiter Griff, Stange zur Brust ziehen, Ellbogen nach unten-hinten führen.",                                    tips:["Nicht nach hinten lehnen","Latissimus bewusst anspannen","Langsam zurück"]},
   {name:"Farmers Carry",               focus:"Core / HYROX",     bg:"#F3E8FF", img:"farmers",  desc:"Schwere Kurzhanteln in beiden Händen halten und 30m zügig gehen.",                                              tips:["Schultern zurück und unten","Blick geradeaus","Gewicht progressiv steigern"]},
-  {name:"Plank / Dead Bug",            focus:"Core",             bg:"#F3E8FF", img:"plank",    desc:"Plank: Unterarme auf dem Boden, Körper gerade. Dead Bug: Rücken flach, Arme und Beine kontrolliert absenken.", tips:["Keine Hüfte hängen lassen","Bauch aktiv anspannen","Gleichmäßig atmen"]}
+  {name:"Plank / Dead Bug",            focus:"Core",             bg:"#F3E8FF", img:"plank",    desc:"Plank: Unterarme auf dem Boden, Körper gerade. Dead Bug: Rücken flach, Arme und Beine kontrolliert absenken.", tips:["Keine Hüfte hängen lassen","Bauch aktiv anspannen","Gleichmäßig atmen"], unit:"s", label:"Meine Zeit"}
+];
+
+var HIIT_EX = [
+  {name:"Burpees",           focus:"Ganzkörper",    desc:"Aus dem Stand in die Liegestützposition springen, Liegestütz, zurückspringen und hochspringen.",          tips:["Hüfte beim Absprung voll strecken","Weich landen, Knie leicht gebeugt","Tempo gleichmäßig halten"]},
+  {name:"Mountain Climbers", focus:"Core / Cardio",  desc:"Liegestützposition, Beine abwechselnd explosiv zur Brust ziehen – wie Laufen in der Horizontalen.",       tips:["Hüfte nicht hochziehen","Core die ganze Zeit angespannt","Schultern über den Handgelenken"]},
+  {name:"Jump Squats",       focus:"Unterkörper",    desc:"Normale Kniebeuge, am tiefsten Punkt explosiv hochspringen, weich landen und direkt in die nächste Beuge.", tips:["Tief genug in die Knie","Arme beim Absprung mitnehmen","Weich landen, Fersen zuerst"]},
+  {name:"Kettlebell Swing",  focus:"Hinge / Cardio", desc:"Kettlebell zwischen den Beinen nach hinten schwingen, Hüfte explosiv nach vorne strecken bis Hüfthöhe.",   tips:["Kraft kommt aus der Hüfte, nicht den Armen","Rücken gerade, kein Rundrücken","Glutes am höchsten Punkt anspannen"]}
 ];
 
 var DAYS = [
@@ -24,6 +31,7 @@ var DAYS = [
 
 var sel = (new Date().getDay() + 6) % 7; // 0=Mo … 6=So
 var openEx = null;
+var openHiit = null;
 var deferredPrompt = null;
 
 // Service Worker
@@ -85,16 +93,30 @@ function togDone(day, key) {
 
 function handleW(i, v) {
   setW("w" + i, v);
+  var unit = EX[i].unit || "kg";
   var rows = document.querySelectorAll(".ex-row");
   if (!rows[i]) { return; }
   var right = rows[i].querySelector(".ex-right");
   var badge = right.querySelector(".w-badge");
   if (v !== "") {
-    if (badge) { badge.textContent = v + " kg"; }
-    else { var s = document.createElement("span"); s.className = "w-badge"; s.textContent = v + " kg"; right.appendChild(s); }
+    if (badge) { badge.textContent = v + " " + unit; }
+    else { var s = document.createElement("span"); s.className = "w-badge"; s.textContent = v + " " + unit; right.appendChild(s); }
   } else {
     if (badge) { badge.remove(); }
   }
+}
+
+function getHiit() { try { return JSON.parse(localStorage.getItem("hiit_s") || "{}"); } catch(e) { return {}; } }
+function handleHiit(i, v) {
+  var h = getHiit(); if (v === "") { delete h["s" + i]; } else { h["s" + i] = v; }
+  localStorage.setItem("hiit_s", JSON.stringify(h));
+  var rows = document.querySelectorAll(".hiit-ex-row");
+  if (!rows[i]) return;
+  var badge = rows[i].querySelector(".w-badge");
+  if (v !== "") {
+    if (badge) { badge.textContent = v + " s"; }
+    else { var span = document.createElement("span"); span.className = "w-badge"; span.style.background = "#16A34A"; span.textContent = v + " s"; rows[i].querySelector(".ex-right").appendChild(span); }
+  } else { if (badge) badge.remove(); }
 }
 
 // ── Export / Import ──────────────────────────────────────────────────────────
@@ -160,6 +182,8 @@ function renderExRows(accent) {
     var isOpen = (openEx === i);
     var isDone = done["c" + i] ? true : false;
     var wval = w["w" + i] || "";
+    var unit = ex.unit || "kg";
+    var inputLabel = ex.label || "Mein Gewicht";
     h += '<div class="ex-row' + (isDone ? ' done' : '') + '">';
     h += '<div class="ex-top">';
     h += '<div class="chk-box" onclick="togDone(' + sel + ',\'c' + i + '\')">' + (isDone ? '&#10003;' : '') + '</div>';
@@ -168,7 +192,7 @@ function renderExRows(accent) {
     h += '<div class="ex-focus">' + ex.focus + '</div>';
     h += '</div>';
     h += '<div class="ex-right" onclick="togEx(' + i + ')">';
-    if (wval !== "") { h += '<span class="w-badge">' + wval + ' kg</span>'; }
+    if (wval !== "") { h += '<span class="w-badge">' + wval + ' ' + unit + '</span>'; }
     h += '</div>';
     h += '<div class="ex-chev' + (isOpen ? ' open' : '') + '" onclick="togEx(' + i + ')">&#9660;</div>';
     h += '</div>';
@@ -180,10 +204,52 @@ function renderExRows(accent) {
       for (var t = 0; t < ex.tips.length; t++) { h += '<div class="ex-tip">' + ex.tips[t] + '</div>'; }
       h += '</div>';
       h += '<div class="w-row">';
-      h += '<span class="w-label">Mein Gewicht</span>';
+      h += '<span class="w-label">' + inputLabel + '</span>';
       h += '<div class="w-group">';
-      h += '<input type="number" class="w-input" value="' + wval + '" placeholder="0" min="0" max="999" step="0.5" onclick="event.stopPropagation()" oninput="handleW(' + i + ',this.value)">';
-      h += '<span class="w-unit">kg</span>';
+      h += '<input type="number" class="w-input" value="' + wval + '" placeholder="0" min="0" max="999" step="' + (unit === 's' ? '5' : '0.5') + '" onclick="event.stopPropagation()" oninput="handleW(' + i + ',this.value)">';
+      h += '<span class="w-unit">' + unit + '</span>';
+      h += '</div></div>';
+      h += '</div>';
+    } else {
+      h += '<div class="ex-detail"></div>';
+    }
+    h += '</div>';
+  }
+  return h;
+}
+
+function renderHiitRows() {
+  var svals = getHiit();
+  var done = getDone(sel);
+  var h = "";
+  for (var i = 0; i < HIIT_EX.length; i++) {
+    var ex = HIIT_EX[i];
+    var isOpen = (openHiit === i);
+    var isDone = done["h" + i] ? true : false;
+    var sval = svals["s" + i] || "";
+    h += '<div class="ex-row hiit-ex-row' + (isDone ? ' done' : '') + '">';
+    h += '<div class="ex-top">';
+    h += '<div class="chk-box" onclick="togDone(' + sel + ',\'h' + i + '\')">' + (isDone ? '&#10003;' : '') + '</div>';
+    h += '<div class="ex-info" onclick="togHiit(' + i + ')">';
+    h += '<div class="ex-name">' + ex.name + '</div>';
+    h += '<div class="ex-focus">' + ex.focus + '</div>';
+    h += '</div>';
+    h += '<div class="ex-right" onclick="togHiit(' + i + ')">';
+    if (sval !== "") { h += '<span class="w-badge" style="background:#16A34A">' + sval + ' s</span>'; }
+    h += '</div>';
+    h += '<div class="ex-chev' + (isOpen ? ' open' : '') + '" onclick="togHiit(' + i + ')">&#9660;</div>';
+    h += '</div>';
+    if (isOpen) {
+      h += '<div class="ex-detail open">';
+      h += '<div class="ex-desc">' + ex.desc + '</div>';
+      h += '<div class="ex-tips">';
+      for (var t = 0; t < ex.tips.length; t++) { h += '<div class="ex-tip">' + ex.tips[t] + '</div>'; }
+      h += '</div>';
+      h += '<div class="w-row">';
+      h += '<span class="w-label">Arbeitszeit</span>';
+      h += '<div class="w-group">';
+      h += '<input type="number" class="w-input" value="' + sval + '" placeholder="40" min="5" max="300" step="5" onclick="event.stopPropagation()" oninput="handleHiit(' + i + ',this.value)">';
+      h += '<span class="w-unit">s</span>';
       h += '</div></div>';
       h += '</div>';
     } else {
@@ -216,9 +282,9 @@ function renderCard() {
     h += renderExRows(d.accent);
     if (d.kind === "hiit") {
       h += '<div class="sec">HIIT-Finish</div>';
-      h += '<div class="hiit-box"><div class="hiit-title">4 Runden · 40 Sek an / 20 Sek Pause · 15 Min</div>';
-      h += '<div class="hiit-sub">Direkt nach dem Kraftteil</div>';
-      h += '<div class="hiit-tags"><span class="hiit-tag">Burpees</span><span class="hiit-tag">Mountain Climbers</span><span class="hiit-tag">Jump Squats</span><span class="hiit-tag">Kettlebell Swing</span></div></div>';
+      h += '<div class="hiit-box"><div class="hiit-title">4 Runden · Arbeitszeit pro Übung / 20 Sek Pause · ~15 Min</div>';
+      h += '<div class="hiit-sub">Direkt nach dem Kraftteil · Antippen für Details & Arbeitszeit</div></div>';
+      h += renderHiitRows();
     }
   } else if (d.kind === "run") {
     h += '<div class="sec">Abhaken wenn erledigt</div>';
@@ -247,7 +313,8 @@ function renderCard() {
 }
 
 function togEx(i) { openEx = (openEx === i) ? null : i; renderCard(); }
-function selDay(i) { sel = i; openEx = null; renderTabs(); renderCard(); }
+function togHiit(i) { openHiit = (openHiit === i) ? null : i; renderCard(); }
+function selDay(i) { sel = i; openEx = null; openHiit = null; renderTabs(); renderCard(); }
 
 function renderTabs() {
   var today = (new Date().getDay() + 6) % 7;
